@@ -52,7 +52,7 @@ public final class Base
 
 	public static void main(String[] args)
 	{
-		message = "Duncan Walter!";	// Could use an arg for this
+		message = "Hello World!";	// Could use an arg for this
 
 		JFrame			frame = new JFrame("Base");
 		JPanel			panel = new HelloPanel(message);
