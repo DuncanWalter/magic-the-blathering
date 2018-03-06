@@ -1,15 +1,91 @@
 package edu.ou.cs.hci.stages;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Enumeration;
 import javax.swing.*;
+
 
 public final class Stage4
 {
+
+	ButtonGroup group;
+	JButton searchButton;
+	JComboBox<String> jComboBox;
+	JTextField searchField;
+	JCheckBox manaBox1 = new JCheckBox("1");
+	JCheckBox manaBox2 = new JCheckBox("2");
+	JCheckBox manaBox3 = new JCheckBox("3");
+	JCheckBox manaBox4 = new JCheckBox("4");
 	public static void main(String[] args)
 	{
+		Stage4 stage4 = new Stage4();
+		JFrame frame = stage4.getUI();
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// set closing behavior
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+
+				JFileChooser jFileChooser = new JFileChooser();
+				jFileChooser.setVisible(true);
+				int returnValue = jFileChooser.showOpenDialog(frame);
+				BufferedWriter bw = null;
+				FileWriter fw = null;
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					String FILENAME = jFileChooser.getSelectedFile().getAbsolutePath();
+					try {
+						String content = "Button Group: " + stage4.getSelectedButtonText(stage4.group);
+						content += "\nTypes: " + stage4.jComboBox.getSelectedItem();
+						content += "\nSearch Field: " + stage4.searchField.getText();
+						content += "\nSelected Mana: ";
+						if(stage4.manaBox1.isSelected()) content += stage4.manaBox1.getText() +" ";
+						if(stage4.manaBox2.isSelected()) content += stage4.manaBox2.getText() + " ";
+						if(stage4.manaBox3.isSelected()) content += stage4.manaBox3.getText() + " ";
+						if(stage4.manaBox4.isSelected()) content += stage4.manaBox4.getText();
+
+						fw = new FileWriter(FILENAME);
+						bw = new BufferedWriter(fw);
+						bw.write(content);
+
+						System.out.println("Done");
+
+					} catch (IOException t) {
+
+						t.printStackTrace();
+
+					} finally {
+
+						try {
+
+							if (bw != null)
+								bw.close();
+
+							if (fw != null)
+								fw.close();
+
+						} catch (IOException ex) {
+
+							ex.printStackTrace();
+
+						}
+
+					}
+				}
+			}
+		});
+	}
+
+	public JFrame getUI(){
+		group = new ButtonGroup();
+		searchButton = new JButton();
+		jComboBox = new JComboBox<>(new String[]{"Type1", "Type2", "Type3"});
 		JFrame frame = new JFrame("Magic!");
-		frame.setPreferredSize(new Dimension(900, 500));
-		frame.setSize(new Dimension(900, 500));
+		frame.setPreferredSize(new Dimension(960, 900));
+		frame.setSize(new Dimension(960, 900));
 		// set main layout
 		frame.setLayout(new GridLayout(0, 3));
 
@@ -19,53 +95,60 @@ public final class Stage4
 		frame.add(getLibraryLayout());
 		//Right pane
 		frame.add(getSelectedCardLayout());
-
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		// set closing behavior
-		frame.addWindowListener(new WindowAdapter() {
-				public void windowClosing(WindowEvent e) {
-					System.exit(0);
-				}
-			});
+		return frame;
 	}
 
-	private static JPanel getFilteringLayout(){
-		// first panel is for "filters"
-		JPanel mainPanel = new JPanel();
-
+	private JScrollPane getFilteringLayout(){
 		JPanel wrapperPanel = new JPanel();
-		wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
-		wrapperPanel.add(new JLabel("Filters", JLabel.CENTER));
-		JPanel filtersPanel = new JPanel();
+		wrapperPanel.setLayout(new GridLayout(15, 1));
+		wrapperPanel.add(new JLabel("Filters"));
 
-		filtersPanel.setLayout(new GridLayout(10, 0));
+		wrapperPanel.add(new JSeparator(JSeparator.HORIZONTAL));
+		wrapperPanel.add(new JLabel("Colors"));
+		JPanel colorPanel = new JPanel();
+		colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
+		JPanel wrapperColorPanel = new JPanel();
+		wrapperColorPanel.setLayout(new GridLayout(2, 2));
 
-		for (int i = 0; i < 5; i++) {
-			filtersPanel.add(new JCheckBox("Box " + i));
-		}
-		ButtonGroup group = new ButtonGroup();
-		for (int i = 0; i < 5; i++) {
-			JRadioButton tempButton = new JRadioButton("Button " + i);
-			group.add(tempButton);
-			filtersPanel.add(tempButton);
-		}
+		JRadioButton redButton = new JRadioButton("Red");
+		JRadioButton blueButton = new JRadioButton("Blue");
+		JRadioButton whiteButton = new JRadioButton("White");
+		JRadioButton greenButton = new JRadioButton("Green");
+		group.add(redButton);
+		group.add(blueButton);
+		group.add(whiteButton);
+		group.add(greenButton);
+		redButton.setSelected(true);
+		wrapperColorPanel.add(redButton);
+		wrapperColorPanel.add(blueButton);
+		wrapperColorPanel.add(whiteButton);
+		wrapperColorPanel.add(greenButton);
+		colorPanel.add(wrapperColorPanel);
+		wrapperPanel.add(colorPanel);
+		wrapperPanel.add(new JSeparator(JSeparator.HORIZONTAL));
+		wrapperPanel.add(new JLabel("Mana Cost"));
+		JPanel manaPanel = new JPanel();
+		manaPanel.setLayout(new GridLayout(2, 2));
+		manaPanel.add(manaBox1);
+		manaPanel.add(manaBox2);
+		manaPanel.add(manaBox3);
+		manaPanel.add(manaBox4);
+		manaBox1.setSelected(true);
 
-		// a dropdown
-		String[] dropdownStrings = new String[5];
-		for (int i = 0; i < 5; i++) {
-			dropdownStrings[i] = ("Option " + (i + 1));
-		}
-		filtersPanel.add(new JComboBox(dropdownStrings));
-		wrapperPanel.add(filtersPanel);
-		return wrapperPanel;
+		wrapperPanel.add(manaPanel);
+		wrapperPanel.add(new JSeparator(JSeparator.HORIZONTAL));
+		wrapperPanel.add(new JLabel("Types"));
+		wrapperPanel.add(jComboBox);
+		wrapperPanel.add(new JSeparator(JSeparator.HORIZONTAL));
+		wrapperPanel.add(new JLabel("Search By Name:"));
+		searchField = new JTextField();
+		wrapperPanel.add(searchField);
+		wrapperPanel.add(new JButton("Search!"));
+		return new JScrollPane(wrapperPanel);
 	}
 
-	private static JScrollPane getLibraryLayout(){
-		// main/central library panel
+	private JScrollPane getLibraryLayout(){
 		JPanel panel = new JPanel();
-
 		JPanel libraryPanel = new JPanel();
 		libraryPanel.setLayout(new GridLayout(0, 4));
 
@@ -78,25 +161,38 @@ public final class Stage4
 		}
 		return new JScrollPane(libraryPanel);
 	}
+	public String getSelectedButtonText(ButtonGroup buttonGroup) {
+		for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+			AbstractButton button = buttons.nextElement();
 
-	private static JPanel getSelectedCardLayout(){
-		// panel to display information about currently selected card
+			if (button.isSelected()) {
+				return button.getText();
+			}
+		}
+
+		return null;
+	}
+
+	private JScrollPane getSelectedCardLayout(){
 		JPanel selectedPanel = new JPanel();
 		selectedPanel.setLayout(new BoxLayout(selectedPanel, BoxLayout.Y_AXIS));
 
 
 		// title for selected card
-		JLabel selectedLabel = new JLabel("Selected Card");
+		JLabel selectedLabel = new JLabel("Aesthir Glider");
+		selectedLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		selectedPanel.add(selectedLabel);
-
-		// details for selected card (just placeholder text for now)
+		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/edu/ou/cs/hci/img/19.jpg"));
+		JLabel picLabel = new JLabel(new ImageIcon(image));
+		picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		selectedPanel.add(picLabel);
 		JTextArea descriptionArea = new JTextArea();
 		descriptionArea.setEditable(false);
 		descriptionArea.setLineWrap(true);
 		descriptionArea.setText("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?");
+		descriptionArea.setAlignmentX(Component.LEFT_ALIGNMENT);
+		descriptionArea.setMaximumSize(new Dimension(315, 1000));
 		selectedPanel.add(descriptionArea);
-		return selectedPanel;
+		return new JScrollPane(selectedPanel);
 	}
 }
-
-//******************************************************************************
