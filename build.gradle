@@ -86,7 +86,7 @@ group = "edu.ou.cs.hci"
 version = '1.0.0'
 
 applicationName = "base"
-mainClassName = "edu.ou.cs.hci.example.Base"
+mainClassName = "edu.ou.cs.hci.stages.Stage4"
 applicationDefaultJvmArgs = ['-Xms128m', '-Xmx756m', '-noclassgc',\
  '-Dfile.encoding=utf-8', '-Dapple.laf.useScreenMenuBar=false',\
  '-Dapple.awt.showGrowBox=true', '-Dapple.awt.brushMetalLook=false',\
