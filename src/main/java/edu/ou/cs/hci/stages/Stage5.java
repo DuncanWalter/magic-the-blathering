@@ -8,7 +8,7 @@ import java.util.Enumeration;
 import javax.swing.*;
 
 
-public final class Stage4
+public final class Stage5
 {
 
 	ButtonGroup group;
@@ -21,8 +21,8 @@ public final class Stage4
 	JCheckBox manaBox4 = new JCheckBox("4");
 	public static void main(String[] args)
 	{
-		Stage4 stage4 = new Stage4();
-		JFrame frame = stage4.getUI();
+		Stage5 stage5 = new Stage5();
+		JFrame frame = stage5.getUI();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -38,14 +38,14 @@ public final class Stage4
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					String FILENAME = jFileChooser.getSelectedFile().getAbsolutePath();
 					try {
-						String content = "Button Group: " + stage4.getSelectedButtonText(stage4.group);
-						content += "\nTypes: " + stage4.jComboBox.getSelectedItem();
-						content += "\nSearch Field: " + stage4.searchField.getText();
+						String content = "Button Group: " + stage5.getSelectedButtonText(stage5.group);
+						content += "\nTypes: " + stage5.jComboBox.getSelectedItem();
+						content += "\nSearch Field: " + stage5.searchField.getText();
 						content += "\nSelected Mana: ";
-						if(stage4.manaBox1.isSelected()) content += stage4.manaBox1.getText() +" ";
-						if(stage4.manaBox2.isSelected()) content += stage4.manaBox2.getText() + " ";
-						if(stage4.manaBox3.isSelected()) content += stage4.manaBox3.getText() + " ";
-						if(stage4.manaBox4.isSelected()) content += stage4.manaBox4.getText();
+						if(stage5.manaBox1.isSelected()) content += stage5.manaBox1.getText() +" ";
+						if(stage5.manaBox2.isSelected()) content += stage5.manaBox2.getText() + " ";
+						if(stage5.manaBox3.isSelected()) content += stage5.manaBox3.getText() + " ";
+						if(stage5.manaBox4.isSelected()) content += stage5.manaBox4.getText();
 
 						fw = new FileWriter(FILENAME);
 						bw = new BufferedWriter(fw);
