@@ -1,14 +1,16 @@
 package edu.ou.cs.hci.stages;
+
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Enumeration;
-import javax.swing.*;
 
 
-public final class Stage5
+public final class Stage4
 {
 
 	ButtonGroup group;
@@ -19,14 +21,10 @@ public final class Stage5
 	JCheckBox manaBox2 = new JCheckBox("2");
 	JCheckBox manaBox3 = new JCheckBox("3");
 	JCheckBox manaBox4 = new JCheckBox("4");
-
-	JMenuBar menuBar;
-	JMenu fileMenu;
-	JMenu editMenu;
-	JMenu helpMenu;
+	
 	public static void main(String[] args)
 	{
-		Stage5 stage5 = new Stage5();
+		Stage4 stage5 = new Stage4();
 		JFrame frame = stage5.getUI();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
