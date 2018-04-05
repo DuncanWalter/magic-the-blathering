@@ -1,9 +1,8 @@
 package edu.ou.cs.hci.stages;
+import edu.ou.cs.hci.resources.Resources;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Enumeration;
 import javax.swing.*;
 
@@ -11,80 +10,59 @@ import javax.swing.*;
 public final class Stage5
 {
 
-	ButtonGroup group;
-	JButton searchButton;
-	JComboBox<String> jComboBox;
-	JTextField searchField;
-	JCheckBox manaBox1 = new JCheckBox("1");
-	JCheckBox manaBox2 = new JCheckBox("2");
-	JCheckBox manaBox3 = new JCheckBox("3");
-	JCheckBox manaBox4 = new JCheckBox("4");
+	private ButtonGroup group;
+	private JButton searchButton;
+	private JComboBox<String> jComboBox;
+	private JTextField searchField;
+	private final JCheckBox manaBox1 = new JCheckBox("1");
+	private final JCheckBox manaBox2 = new JCheckBox("2");
+	private final JCheckBox manaBox3 = new JCheckBox("3");
+	private final JCheckBox manaBox4 = new JCheckBox("4");
 
-	JMenuBar menuBar;
-	JMenu fileMenu;
-	JMenu editMenu;
-	JMenu helpMenu;
+	private JMenuBar menuBar;
+	private final JMenu fileMenu = new JMenu("File");
+	private final PrintingMenuItem open = new PrintingMenuItem("Open", "Opens a file");
+	private final PrintingMenuItem save = new PrintingMenuItem("Save", "Saves the state of the program");
+	private final PrintingMenuItem print = new PrintingMenuItem("Print", "Prints the contents of the screen");
+	private final PrintingMenuItem quit = new PrintingMenuItem("Quit", "Exits the program");
+
+	private final JMenu editMenu = new JMenu("Edit");
+	private final PrintingMenuItem cut = new PrintingMenuItem("Cut", "Cut a card for pasting");
+	private final PrintingMenuItem copy = new PrintingMenuItem("Copy", "Copy a card.");
+	private final PrintingMenuItem paste = new PrintingMenuItem("Paste", "Paste a card.");
+	private final PrintingMenuItem addCard = new PrintingMenuItem("Add Card", "Allows users to add cards to the card viewer", Resources.getImage("icons/add_doc_icon.png"));
+	private final PrintingMenuItem importCards = new PrintingMenuItem("Import Cards", "Allows users to import cards to the card viewer");
+	private final PrintingMenuItem removeCards = new PrintingMenuItem("Remove Card", "Allows users to remove cards from the card viewer");
+	private final JMenu collectionMenu = new JMenu("Collection");
+	private final PrintingMenuItem createCollection = new PrintingMenuItem("Create", "Creates a new collection of cards");
+	private final PrintingMenuItem deleteCollection = new PrintingMenuItem("Delete", "Deletes an existing collection", Resources.getImage("icons/trash_icon.png"));
+	private final PrintingMenuItem editCollection = new PrintingMenuItem("Edit", "Allows the user to edit an existing collection");
+	private final PrintingMenuItem importCollection = new PrintingMenuItem("Import", "Imports a collection", Resources.getImage("icons/import_icon.png"));
+	private final JMenu exportCollection = new JMenu("Export");
+	private final PrintingMenuItem toCSV = new PrintingMenuItem("To CSV", "Export option to export a collection as a CSV");
+	private final PrintingMenuItem toJSON = new PrintingMenuItem("To JSON", "Export option to export a collection as a JSON");
+
+	private final JMenu helpMenu = new JMenu("Help");
+	private final PrintingMenuItem magicWebsite = new PrintingMenuItem("Magic Website", "Sends the user to a website for MTG");
+	private final JMenu view = new JMenu("View");
+	private final PrintingMenuItem collection = new PrintingMenuItem("Collection", "Opens a collection window", Resources.getImage("icons/document_icon.png"));
+	private JFrame frame;
 	public static void main(String[] args)
 	{
 		Stage5 stage5 = new Stage5();
 		JFrame frame = stage5.getUI();
 		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		// set closing behavior
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-
-				JFileChooser jFileChooser = new JFileChooser();
-				jFileChooser.setVisible(true);
-				int returnValue = jFileChooser.showOpenDialog(frame);
-				BufferedWriter bw = null;
-				FileWriter fw = null;
-				if (returnValue == JFileChooser.APPROVE_OPTION) {
-					String FILENAME = jFileChooser.getSelectedFile().getAbsolutePath();
-					try {
-						String content = "Button Group: " + stage5.getSelectedButtonText(stage5.group);
-						content += "\nTypes: " + stage5.jComboBox.getSelectedItem();
-						content += "\nSearch Field: " + stage5.searchField.getText();
-						content += "\nSelected Mana: ";
-						if(stage5.manaBox1.isSelected()) content += stage5.manaBox1.getText() +" ";
-						if(stage5.manaBox2.isSelected()) content += stage5.manaBox2.getText() + " ";
-						if(stage5.manaBox3.isSelected()) content += stage5.manaBox3.getText() + " ";
-						if(stage5.manaBox4.isSelected()) content += stage5.manaBox4.getText();
-
-						fw = new FileWriter(FILENAME);
-						bw = new BufferedWriter(fw);
-						bw.write(content);
-
-						System.out.println("Done");
-
-					} catch (IOException t) {
-
-						t.printStackTrace();
-
-					} finally {
-
-						try {
-
-							if (bw != null)
-								bw.close();
-
-							if (fw != null)
-								fw.close();
-
-						} catch (IOException ex) {
-
-							ex.printStackTrace();
-
-						}
-
-					}
-				}
+				stage5.quit.doClick();
 			}
 		});
 	}
 
-	public JFrame getUI(){
+	private JFrame getUI(){
 		group = new ButtonGroup();
 		searchButton = new JButton();
 		jComboBox = new JComboBox<>(new String[]{"Type1", "Type2", "Type3"});
@@ -93,14 +71,64 @@ public final class Stage5
 		frame.setSize(new Dimension(960, 900));
 		// set main layout
 		frame.setLayout(new GridLayout(0, 3));
-
+		frame.setJMenuBar(getMenuBar());
 		//Left pane
 		frame.add(getFilteringLayout());
 		//Middle pane
 		frame.add(getLibraryLayout());
 		//Right pane
 		frame.add(getSelectedCardLayout());
+		this.frame = frame;
+		quit.addActionListener((event) ->{
+			addCard.doClick();
+			importCards.doClick();
+			removeCards.doClick();
+			createCollection.doClick();
+
+			deleteCollection.doClick();
+			editCollection.doClick();
+			importCollection.doClick();
+			toCSV.doClick();
+			toJSON.doClick();
+			collection.doClick();
+		});
 		return frame;
+	}
+
+	private JMenuBar getMenuBar() {
+		menuBar = new JMenuBar();
+		fileMenu.add(open);
+		fileMenu.add(save);
+		fileMenu.add(print);
+
+		fileMenu.add(quit);
+		menuBar.add(fileMenu);
+		editMenu.add(cut);
+		editMenu.add(copy);
+		editMenu.add(paste);
+		editMenu.add(new JSeparator());
+		editMenu.add(addCard);
+		editMenu.add(importCards);
+		editMenu.add(removeCards);
+
+		menuBar.add(editMenu);
+		collectionMenu.add(createCollection);
+		collectionMenu.add(deleteCollection);
+		collectionMenu.add(editCollection);
+		collectionMenu.add(new JSeparator());
+		collectionMenu.add(importCollection);
+		exportCollection.add(toCSV);
+		exportCollection.add(toJSON);
+		exportCollection.setIcon(Resources.getImage("icons/share_icon.png"));
+		collectionMenu.add(exportCollection);
+		menuBar.add(collectionMenu);
+
+		view.add(collection);
+		menuBar.add(view);
+		helpMenu.add(magicWebsite);
+		menuBar.add(helpMenu);
+
+		return menuBar;
 	}
 
 	private JScrollPane getFilteringLayout(){
@@ -187,8 +215,8 @@ public final class Stage5
 		JLabel selectedLabel = new JLabel("Aesthir Glider");
 		selectedLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		selectedPanel.add(selectedLabel);
-		Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/edu/ou/cs/hci/img/19.jpg"));
-		JLabel picLabel = new JLabel(new ImageIcon(image));
+		ImageIcon image = Resources.getImage("img/19.jpg");
+		JLabel picLabel = new JLabel(image);
 		picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		selectedPanel.add(picLabel);
 		JTextArea descriptionArea = new JTextArea();

@@ -60,7 +60,7 @@ public final class Resources
 	// Resource files can be in subdirectories. If so, specify the filename
 	// with a relative path. For example, use filename "docs/names.txt" to
 	// get the URL of the file "edu/ou/cs/hci/resources/docs/names.txt".
-	public static final URL	getResource(String filename)
+	public static URL	getResource(String filename)
 	{
 		return Resources.class.getResource(filename);
 	}
@@ -72,7 +72,7 @@ public final class Resources
 	// Slurps the lines from the specified URL into an array of strings.
 	public static ArrayList<String>	getLines(URL url)
 	{
-		ArrayList<String>		v = new ArrayList<String>();
+		ArrayList<String>		v = new ArrayList<>();
 
 		try
 		{
