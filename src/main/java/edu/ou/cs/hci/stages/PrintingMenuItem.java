@@ -11,7 +11,7 @@ public class PrintingMenuItem extends JMenuItem{
     public PrintingMenuItem(String name, String descToPrint){
         super(name);
         this.descToPrint = descToPrint;
-        addActionListener((event)-> System.out.println(name + ":" + descToPrint));
+        //addActionListener((event)-> System.out.println(name + ":" + descToPrint));
     }
 
     public PrintingMenuItem(String name, String descToPrint, ImageIcon icon){
