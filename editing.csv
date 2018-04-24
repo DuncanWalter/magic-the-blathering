@@ -1,0 +1,37 @@
+Moss Monster23,GGNNN,,"After the battle, an eerie silence gripped the forest. The losers' remains were lightly dusted with green.",Creature Monster,moss.png
+Forest,,,,Basic Land Forest,forest.png
+Forest Bear,GN,,,Creature Bear,bear.png
+Giant Badger,GGN,"Whenever Giant Badger blocks, it gets +2/+2 until end of turn.",,Creature Badger,badger.png
+Roaring Slugwurm,GGNNNNN,"Whenever Roaring Slagwurm attacks, tap all artifacts.",,Creature Wurm,slugwurm.png
+Active Volcano,R,"
+Choose one.
+Destroy target blue permanent.
+Return target Island to its owner's hand.",The wizard Greensleeves called a Giant Badger to her aid in an battle with the desert mage Karli.,Instant,volcano.png
+Afflicted Deserter,NNNR,"At the beginning of each upkeep, if no spells were cast last turn, transform Afflicted Deserter.",Wurms compete for nesting grounds near the Radix. The young who hatch closest have the best chance for survival.,Creature � Human Werewolf,deserter.png
+Agent of Stromgald,R,Add Black mana to your pool,,Creature � Human Knight,agent.png
+Akroan Crusader,R,"Heroic. Whenever you cast a spell that targets Akroan Crusader, create a 1/1 red Soldier creature token with haste.",The rising of the first full moon eliminated any doubt as to the horrible truth lurking within.,Creature � Human Soldier,crusader.png
+Mountain,,Add Black mana to your pool,"""The Order of Stromgald spreads its poisonous lies from within Varchild's troops, and still she sees only visions of conquest.""",Basic Land � Mountain,mountain.png
+Aesthir Glider,NNN,"Flying
+Aesthir Glider can't block.",,Artifact Creature � Bird,aesthir.jpg
+Fatal Push,A,"Destroy target creature if it has converted mana cost 2 or less.
+Revolt - Destroy that creature if it has converted mana cost 4 or less instead if a permanent you controlled left the battlefield this turn. ",An Akroan soldier's worth is measured by the number of swords raised by his battle cry.,Instant,push.png
+Juzam Djinn,AANN,"At the beginning of your upkeep, Juzam Djinn deals 1 damage to you.",,Creature - Djinn,djinn.png
+Chains of Mephistopholes,AN,"If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard.","�A fine example of the rewards of artifice: a thoroughly obedient steed with wings of Soldevi steel.� - Arcum Dagsson, Soldevi Machinist",Enchantment,chains.png
+The Abyss,ANNN,"At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.",,World Enchantment,abyss.png
+Royal Assassin,AAN,Tap to destroy any tapped creature.,�Expect my visit when the darkness comes. The night I think is best for hiding all.� - Ouallada,Creature Human Assassin,assassin.png
+Archivist,NNUU,Draw a card.,,"Creature Human Wizard ",archivist.png
+Counterintelligence,NNUU,Return one or two target creatures to their owners' hands.,,Sorcery,counterintell.jpg
+Isperia�s Skywatch,NNNNNU,"When Isperia's Skywatch enters the battlefield, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)","Trained in the arts of stealth, the royal assassins choose their victims carefully, relying on timing and precision rather than brute force.","Creature �Vedalken Knight ",skywatch.jpg
+Opt,U,"Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+
+Draw a card.","""Sit down and read. Educate yourself for the coming conflicts.""",Instant,opt.jpg
+Gift of Immortality,NNW,"Enchant creature
+
+When enchanted creature dies, return that card to the battlefield under its owner's control. Return Gift of Immortality to the battlefield attached to that creature at the beginning of the next end step.",,"Enchantment ",immortality.jpg
+Imperial Mask,NNNNW,"When Imperial Mask enters the battlefield, if it's not a token, each of your teammates creates a token that's a copy of Imperial Mask.
+
+You have hexproof. (You can't be the target of spells or abilities your opponents control.)","Before the battle of Red Cliffs, a supposedly sleeping Zhou Yu allowed his old friend, a Wei advisor, to steal a planted letter forged as if from Wei's two best admirals.",Enchantment,mask.jpg
+Longbow Archer,WW,First strike; reach (This creature can block creatures with flying.),,"Creature Human Soldier Archer ",archer.jpg
+Mistral Charger,NW,Flying,"""It's easy to anticipate Captain Storm's orders: take the more dangerous route.""","Creature Pegasus ",charger.jpg
+Moment of Triumph,W,Target creature gets +2/+2 until end of turn. You gain 2 life.,,Instant,triumph.jpg
+"",,,,,
