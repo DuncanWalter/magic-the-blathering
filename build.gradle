@@ -86,7 +86,7 @@ group = "edu.ou.cs.hci"
 version = '1.0.0'
 
 applicationName = "base"
-mainClassName = "edu.ou.cs.hci.example.Base"
+mainClassName = "edu.ou.cs.hci.stages.Stage8"
 applicationDefaultJvmArgs = ['-Xms128m', '-Xmx756m', '-noclassgc',\
  '-Dfile.encoding=utf-8', '-Dapple.laf.useScreenMenuBar=false',\
  '-Dapple.awt.showGrowBox=true', '-Dapple.awt.brushMetalLook=false',\
@@ -113,7 +113,7 @@ createScript(project, 'edu.ou.cs.hci.stages.BuildTest', 'build-test', altJvmArgs
 //createScript(project, 'edu.ou.cs.hci.stages.Stage4', 'stage4', altJvmArgs)
 //createScript(project, 'edu.ou.cs.hci.stages.Stage5', 'stage5', altJvmArgs)
 //createScript(project, 'edu.ou.cs.hci.stages.Stage6', 'stage6', altJvmArgs)
-createScript(project, 'edu.ou.cs.hci.stages.Stage7', 'stage7', altJvmArgs)
+createScript(project, 'edu.ou.cs.hci.stages.Stage8', 'stage8', altJvmArgs)
 
 //******************************************************************************
 // Source Sets

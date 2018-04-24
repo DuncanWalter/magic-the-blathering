@@ -110,7 +110,7 @@ public final class Stage8
         c.gridy = 0;
         c.fill = GridBagConstraints.BOTH;
         c.anchor = GridBagConstraints.PAGE_END;
-        c.ipady = 100;
+        //c.ipady = 100;
         //Left pane
         frame.add(getFilteringLayout(), c);
         c.gridx = 1;
@@ -294,6 +294,7 @@ public final class Stage8
                 BufferedReader r = new BufferedReader(isr);
                 for (CSVRecord record : CSVFormat.DEFAULT.parse(r)) {
                     Card card = new Card(record.get(0), record.get(1), record.get(2), record.get(3), record.get(4), record.get(5));
+                    card.setPreferredSize(new Dimension(200, 300));
                     card.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
@@ -392,7 +393,10 @@ public final class Stage8
 
     private JScrollPane getLibraryLayout(){
         libraryPanel = new JPanel();
-        libraryPanel.setLayout(new GridLayout(0, 4, 10, 10));
+        GridLayout libLayout = new GridLayout(0, 4);
+        libLayout.setVgap(10);
+        libLayout.setHgap(10);
+        libraryPanel.setLayout(libLayout);
         return new JScrollPane(libraryPanel);
     }
 
